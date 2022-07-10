@@ -1,0 +1,457 @@
+﻿<Window x:Class="View.WindowResult"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:View"
+        xmlns:localmodel="clr-namespace:ViewModel;assembly=ViewModel"
+        mc:Ignorable="d"
+        Title="Результаты вычесления ТТХ" Height="700" Width="1100" ResizeMode="NoResize">
+    <Window.Resources>
+        <local:DistanceEnumConverter x:Key="myDistanceConverter" />
+        <local:TimeEnumConverter x:Key="myTimeConverter" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+
+        <GroupBox  Margin="5" Grid.Column="0"  Grid.Row="0" >
+            <GroupBox.Header>
+                <TextBlock Text="Параметры определяющие геометрию радиолкационого обзора поверхности" MaxWidth="400" TextWrapping="Wrap" FontWeight="Heavy"  FontSize="15" />
+            </GroupBox.Header>
+            <Grid Margin="5" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.RowSpan="10" Grid.ColumnSpan="3" Opacity="0.3" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="Red" Offset="0"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+
+                <Border Grid.Row="0"  Grid.ColumnSpan="3" Opacity="0.5" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="Red" Offset="0"/>
+                            <GradientStop Color="#C3FF3A3A" Offset="0.4"/>
+                            <GradientStop Color="#BBFF9A9A" Offset="0.8"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Не просматриваемая зона" Grid.Column="0" Grid.Row="0" Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"   FontWeight="Bold"/>
+                <TextBlock Text="{Binding Path=NotVisibleArea}" Grid.Column="1" Grid.Row="0"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="0" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="4" ItemsSource="{Binding DistanceCollections}" SelectedValue="{Binding Path = NotVisibleAreaDistance}" SelectedValuePath="Value" DisplayMemberPath="Key"/>
+
+                <TextBlock Text="Минимальная горизонтальная дальность" Grid.Column="0" Grid.Row="1"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=MinHorizontalRange}" Grid.Column="1" Grid.Row="1"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="1" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="4" ItemsSource="{Binding DistanceCollections}" SelectedValue="{Binding Path = MinHorizontalRangeDistance}" SelectedValuePath="Value" DisplayMemberPath="Key" />
+
+                <Border Grid.Row="2"  Grid.ColumnSpan="3" Opacity="0.5" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="Red" Offset="0"/>
+                            <GradientStop Color="#C3FF3A3A" Offset="0.4"/>
+                            <GradientStop Color="#BBFF9A9A" Offset="0.8"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Максимальная горизонтальная дальность" Grid.Column="0" Grid.Row="2"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=MaxHorizontalRange}" Grid.Column="1" Grid.Row="2"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="2" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="4" ItemsSource="{Binding DistanceCollections}" SelectedValue="{Binding Path = MaxHorizontalRangeDistance}" SelectedValuePath="Value" DisplayMemberPath="Key"  />
+
+                <TextBlock Text="Минимальная дальность радиолокационного наблюдения" Grid.Column="0" Grid.Row="3"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=MinRangeOfRadarSurveillance}" Grid.Column="1" Grid.Row="3"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="3" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="4" ItemsSource="{Binding DistanceCollections}" SelectedValue="{Binding Path = MinRangeOfRadarSurveillanceDistance}" SelectedValuePath="Value" DisplayMemberPath="Key"  />
+
+                <Border Grid.Row="4"  Grid.ColumnSpan="3" Opacity="0.5" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="Red" Offset="0"/>
+                            <GradientStop Color="#C3FF3A3A" Offset="0.4"/>
+                            <GradientStop Color="#BBFF9A9A" Offset="0.8"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Минимальный угол визирования" Grid.Column="0" Grid.Row="4"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=MinSightingAngle}" Grid.Column="1" Grid.Row="4"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="4" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="23" Width="auto" SelectedIndex="0" ItemsSource="{Binding MeasureOfАngle}" SelectedValue="{Binding Path = MinSightingAngleMeasureOfАngle}" SelectedValuePath="Value" DisplayMemberPath="Key" />
+
+                <TextBlock Text="Максимальный угол визирования" Grid.Column="0" Grid.Row="5"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=MaxSightingAngle}" Grid.Column="1" Grid.Row="5"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="5" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="0" ItemsSource="{Binding MeasureOfАngle}" SelectedValue="{Binding Path = MaxSightingAngleMeasureOfАngle}" SelectedValuePath="Value" DisplayMemberPath="Key"  />
+
+                <Border Grid.Row="6"  Grid.ColumnSpan="3" Opacity="0.5" Margin="-2" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="Red" Offset="0"/>
+                            <GradientStop Color="#C3FF3A3A" Offset="0.4"/>
+                            <GradientStop Color="#BBFF9A9A" Offset="0.8"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Ширина полосы наблюдения" Grid.Column="0" Grid.Row="6"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=ObservationBandwidth}" Grid.Column="1" Grid.Row="6"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="6" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="4" ItemsSource="{Binding DistanceCollections}" SelectedValue="{Binding Path = ObservationBandwidthDistance}" SelectedValuePath="Value" DisplayMemberPath="Key"  />
+
+            </Grid>
+
+        </GroupBox>
+
+        <GroupBox  Margin="5" Grid.Column="0"  Grid.Row="1"  >
+            <GroupBox.Header>
+                <TextBlock Text="Параметры зондирующего излучения" MaxWidth="400" TextWrapping="Wrap" FontWeight="Heavy"  FontSize="15" />
+            </GroupBox.Header>
+            <Grid Margin="5" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.RowSpan="10" Grid.ColumnSpan="3" Opacity="0.3" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="Blue" Offset="0"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                
+                
+                <Border Grid.Row="0"  Grid.ColumnSpan="3" Opacity="0.5" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="Blue" Offset="0"/>
+                            <GradientStop Color="#FF6060F2" Offset="0.4"/>
+                            <GradientStop Color="#FF9A9AF7" Offset="0.8"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Длительность сигнала" Grid.Column="0" Grid.Row="0" Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=SignalDuration}" Grid.Column="1" Grid.Row="0"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="0" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="0" ItemsSource="{Binding TimeCollections}" SelectedValue="{Binding Path = SignalDurationTime}" SelectedValuePath="Value" DisplayMemberPath="Key" />
+
+                <TextBlock Text="Длительность сигнала с поправкой на 0, 16" Grid.Column="0" Grid.Row="1"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBox Text="{Binding Path=CorrectedSignalDuration}" Grid.Column="1" Grid.Row="1"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="1" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="0" ItemsSource="{Binding TimeCollections}" SelectedValue="{Binding Path = CorrectedSignalDurationTime}" SelectedValuePath="Value" DisplayMemberPath="Key" />
+
+                <Border Grid.Row="2"  Grid.ColumnSpan="3" Opacity="0.5" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="Blue" Offset="0"/>
+                            <GradientStop Color="#FF6060F2" Offset="0.4"/>
+                            <GradientStop Color="#FF9A9AF7" Offset="0.8"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Девиация частоты" Grid.Column="0" Grid.Row="2"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=FrequencyDeviation}" Grid.Column="1" Grid.Row="2"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <TextBlock Text="Гц" Grid.Column="2" Grid.Row="2"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  />
+
+                <TextBlock Text="Длительность зондирующего импульса" Grid.Column="0" Grid.Row="3"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=ProbingPulseDuration}" Grid.Column="1" Grid.Row="3"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="3" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="0" ItemsSource="{Binding TimeCollections}" SelectedValue="{Binding Path = ProbingPulseDurationTime}" SelectedValuePath="Value" DisplayMemberPath="Key" />
+
+                <Border Grid.Row="4"  Grid.ColumnSpan="3" Opacity="0.5" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="Blue" Offset="0"/>
+                            <GradientStop Color="#FF6060F2" Offset="0.4"/>
+                            <GradientStop Color="#FF9A9AF7" Offset="0.8"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Верхняя граница частоты импульсов" Grid.Column="0" Grid.Row="4"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=UpperLimitOfPulseFrequency}" Grid.Column="1" Grid.Row="4"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <TextBlock Text="Гц" Grid.Column="2" Grid.Row="4"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  />
+
+                <TextBlock Text="Нижняя граница частоты импульсов" Grid.Column="0" Grid.Row="5"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=LowerLimitOfPulseFrequency}" Grid.Column="1" Grid.Row="5"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <TextBlock Text="Гц" Grid.Column="2" Grid.Row="5"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  />
+
+                <Border Grid.Row="6"  Grid.ColumnSpan="3" Opacity="0.5" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="Blue" Offset="0"/>
+                            <GradientStop Color="#FF6060F2" Offset="0.4"/>
+                            <GradientStop Color="#FF9A9AF7" Offset="0.8"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Частота повторения импульсов" Grid.Column="0" Grid.Row="6"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=PulseRepetitionRate}" Grid.Column="1" Grid.Row="6"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <TextBlock Text="[Гц;Гц]" Grid.Column="2" Grid.Row="6"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  />
+
+            </Grid>
+
+        </GroupBox>
+
+        <GroupBox  Margin="5" Grid.Column="1"  Grid.Row="0"  >
+            <GroupBox.Header>
+                <TextBlock Text="Параметры бортовой антенны" MaxWidth="400" TextWrapping="Wrap" FontWeight="Heavy"  FontSize="15" />
+            </GroupBox.Header>
+            <Grid Margin="5" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.RowSpan="10" Grid.ColumnSpan="3" Opacity="0.3" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="Gray" Offset="0"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+
+                <Border Grid.Row="0"  Grid.ColumnSpan="3" Opacity="0.5" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="Gray" Offset="0"/>
+                            <GradientStop Color="#FFB9B9B9" Offset="0.4"/>
+                            <GradientStop Color="#FFCCCCCC" Offset="0.8"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Ширина направленности антенны в вертикальной плоскости" Grid.Column="0" Grid.Row="0" Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=AntennaBeamwidthInTheVertical}" Grid.Column="1" Grid.Row="0"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="0" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="0" ItemsSource="{Binding MeasureOfАngle}" SelectedValue="{Binding Path = AntennaBeamwidthInTheVerticalMeasureOfАngle}" SelectedValuePath="Value" DisplayMemberPath="Key" />
+
+                <TextBlock Text="Ширина направленности антенны в горизонтальной плоскости" Grid.Column="0" Grid.Row="1"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=AntennaBeamwidthInTheHorizontal}" Grid.Column="1" Grid.Row="1"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="1" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="0" ItemsSource="{Binding MeasureOfАngle}" SelectedValue="{Binding Path = AntennaBeamwidthInTheHorizontalMeasureOfАngle}" SelectedValuePath="Value" DisplayMemberPath="Key" />
+
+                <Border Grid.Row="2"  Grid.ColumnSpan="3" Opacity="0.5" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="Gray" Offset="0"/>
+                            <GradientStop Color="#FFB9B9B9" Offset="0.4"/>
+                            <GradientStop Color="#FFCCCCCC" Offset="0.8"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Раскрыв антенны в вертикальной пл-ти" Grid.Column="0" Grid.Row="2"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=OpeningTheAntennasInTheVertical}" Grid.Column="1" Grid.Row="2"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="2" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="4" ItemsSource="{Binding DistanceCollections}" SelectedValue="{Binding Path = OpeningTheAntennasInTheVerticalDistance}" SelectedValuePath="Value" DisplayMemberPath="Key" />
+
+                <TextBlock Text="Нижняя граница раскрыва антенны" Grid.Column="0" Grid.Row="3"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=LowerBoundaryOfTheAntenna}" Grid.Column="1" Grid.Row="3"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="3" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="4" ItemsSource="{Binding DistanceCollections}" SelectedValue="{Binding Path = LowerBoundaryOfTheAntennaDistance}" SelectedValuePath="Value" DisplayMemberPath="Key" />
+
+                <Border Grid.Row="4"  Grid.ColumnSpan="3" Opacity="0.5" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="Gray" Offset="0"/>
+                            <GradientStop Color="#FFB9B9B9" Offset="0.4"/>
+                            <GradientStop Color="#FFCCCCCC" Offset="0.8"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Верхняя граница раскрыва антенны" Grid.Column="0" Grid.Row="4"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=UpperBoundaryOfTheAntenna}" Grid.Column="1" Grid.Row="4"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="4" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="4" ItemsSource="{Binding DistanceCollections}" SelectedValue="{Binding Path = UpperBoundaryOfTheAntennaDistance}" SelectedValuePath="Value" DisplayMemberPath="Key" />
+
+                <TextBlock Text="Нижняя граница раскрыва антенны с цифр" Grid.Column="0" Grid.Row="5"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=LowerBoundaryOfTheAntennaNumbers}" Grid.Column="1" Grid.Row="5"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="5" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="4" ItemsSource="{Binding DistanceCollections}" SelectedValue="{Binding Path = LowerBoundaryOfTheAntennaNumbersDistance}" SelectedValuePath="Value" DisplayMemberPath="Key" />
+
+                <Border Grid.Row="6"  Grid.ColumnSpan="3" Opacity="0.5" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="Gray" Offset="0"/>
+                            <GradientStop Color="#FFB9B9B9" Offset="0.4"/>
+                            <GradientStop Color="#FFCCCCCC" Offset="0.8"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Ширина сектора диаграммы направленности антенны в горизонтальной пл-ти, в пределах которых должна проводиться когертная обработка отраженных сигналов" Grid.Column="0" Grid.Row="6"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=AntennaSectorWidth}" Grid.Column="1" Grid.Row="6"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="6" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="0" ItemsSource="{Binding MeasureOfАngle}" SelectedValue="{Binding Path = AntennaSectorWidthMeasureOfАngle}" SelectedValuePath="Value" DisplayMemberPath="Key" />
+
+                <TextBlock Text="Коэффициент направленного действия антенны" Grid.Column="0" Grid.Row="7"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=CoefficientAntennaAction}" Grid.Column="1" Grid.Row="7"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <TextBlock Text="дБ" Grid.Column="2" Grid.Row="7"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  />
+
+            </Grid>
+
+        </GroupBox>
+
+        <GroupBox  Margin="5" Grid.Column="1"  Grid.Row="1"  >
+            <GroupBox.Header>
+                <TextBlock Text="Другие параметры" MaxWidth="400" TextWrapping="Wrap" FontWeight="Heavy"  FontSize="15" />
+            </GroupBox.Header>
+            <Grid Margin="5" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.RowSpan="10" Grid.ColumnSpan="3" Opacity="0.3" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="#FFFFAC00" Offset="0"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                
+                <Border Grid.Row="0"  Grid.ColumnSpan="3" Opacity="0.5" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="#FFFFAC00" Offset="0"/>
+                            <GradientStop Color="#FFFFBD34" Offset="0.4"/>
+                            <GradientStop Color="#FFFCCD6C" Offset="0.8"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Ширина энергетического спектра" Grid.Column="0" Grid.Row="0" Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=EnergySpectrum}" Grid.Column="1" Grid.Row="0"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <TextBlock Text="Гц" Grid.Column="2" Grid.Row="0"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  />
+
+                <TextBlock Text="Ширина доплеровского спектра" Grid.Column="0" Grid.Row="1"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=DopplerSpectrumWidth}" Grid.Column="1" Grid.Row="1"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <TextBlock Text="Гц" Grid.Column="2" Grid.Row="1"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  />
+
+                <Border Grid.Row="2"  Grid.ColumnSpan="3" Opacity="0.5" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="#FFFFAC00" Offset="0"/>
+                            <GradientStop Color="#FFFFBD34" Offset="0.4"/>
+                            <GradientStop Color="#FFFCCD6C" Offset="0.8"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Шумовая полоса" Grid.Column="0" Grid.Row="2"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=NoiseStripe}" Grid.Column="1" Grid.Row="2"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <TextBlock Text="Гц" Grid.Column="2" Grid.Row="2"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  />
+
+                <TextBlock Text="Коэффициент шума" Grid.Column="0" Grid.Row="3"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=CoefficientNoise}" Grid.Column="1" Grid.Row="3"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+
+                <Border Grid.Row="4"  Grid.ColumnSpan="3" Opacity="0.5" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="#FFFFAC00" Offset="0"/>
+                            <GradientStop Color="#FFFFBD34" Offset="0.4"/>
+                            <GradientStop Color="#FFFCCD6C" Offset="0.8"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Шумовая температура" Grid.Column="0" Grid.Row="4"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=NoiseTemperature}" Grid.Column="1" Grid.Row="4"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <ComboBox  Grid.Column="2" Grid.Row="4" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="0" ItemsSource="{Binding TempCollections}" SelectedValue="{Binding Path = NoiseTemperatureTemp}" SelectedValuePath="Value" DisplayMemberPath="Key" />
+
+                <TextBlock Text="Мощность шумов" Grid.Column="0" Grid.Row="5"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=NoisePower}" Grid.Column="1" Grid.Row="5"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <TextBlock Text="Вт" Grid.Column="2" Grid.Row="5"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  />
+
+                <Border Grid.Row="6"  Grid.ColumnSpan="3" Opacity="0.5" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="#FFFFAC00" Offset="0"/>
+                            <GradientStop Color="#FFFFBD34" Offset="0.4"/>
+                            <GradientStop Color="#FFFCCD6C" Offset="0.8"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Чувствительность радиоприёмного устройства" Grid.Column="0" Grid.Row="6"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=RadioSensitivity}" Grid.Column="1" Grid.Row="6"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <TextBlock Text="Вт" Grid.Column="2" Grid.Row="6"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  />
+
+                <TextBlock Text="Ширина полосы пропускания приёмного устройства" Grid.Column="0" Grid.Row="7"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=ReceiverBandwidth}" Grid.Column="1" Grid.Row="7"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <TextBlock Text="Гц" Grid.Column="2" Grid.Row="7"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  />
+
+                <Border Grid.Row="8"  Grid.ColumnSpan="3" Opacity="0.5" Margin="-3,-1,-1,-1" CornerRadius="10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="#FFFFAC00" Offset="0"/>
+                            <GradientStop Color="#FFFFBD34" Offset="0.4"/>
+                            <GradientStop Color="#FFFCCD6C" Offset="0.8"/>
+                            <GradientStop  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Эффективная площадь рассеяния сухой степи" Grid.Column="0" Grid.Row="8"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"  />
+                <TextBlock Text="{Binding Path=EffectiveScatteringAreaOfDrySteppe}" Grid.Column="1" Grid.Row="8"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Height="20" MinWidth="150" />
+                <TextBlock Text="м²" Grid.Column="2" Grid.Row="8"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  />
+
+            </Grid>
+
+        </GroupBox>
+        
+    </Grid>
+</Window>

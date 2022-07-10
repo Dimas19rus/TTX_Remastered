@@ -1,0 +1,230 @@
+﻿<Window x:Class="View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:View"
+        xmlns:localmodel="clr-namespace:ViewModel;assembly=ViewModel"
+        mc:Ignorable="d"
+        Title="Тактико-технические характеристики РЛС обзора поверхности" Height="480" Width="950" ResizeMode="NoResize">
+    <Window.Resources>
+        <local:DistanceEnumConverter x:Key="myDistanceConverter" />
+        <local:TimeEnumConverter x:Key="myTimeConverter" />
+
+    </Window.Resources>
+
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+       
+        <Label Content="Входные параметры" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="2" FontSize="18" FontFamily="Microsoft New Tai Lue" FontWeight="Bold"  />
+
+        <Grid Grid.Row="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox  Margin="5"  Grid.RowSpan="2" >
+                <GroupBox.Header>
+                    <TextBlock Text="Общие параметры" MaxWidth="400" TextWrapping="Wrap" FontWeight="Heavy"  FontSize="15" />
+                </GroupBox.Header>
+                <Grid Margin="5"  >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.RowSpan="10" Grid.ColumnSpan="3" Opacity="0.2" Margin="-5" CornerRadius="10">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                                <GradientStop Color="Red" Offset="0"/>
+                                <GradientStop  Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+
+                    <TextBlock Text="Длина рабочей волны" Grid.Column="0" Grid.Row="0"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"   />
+                    <TextBox Text="{Binding Wavelength, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="TextBox_PreviewTextInput"  Grid.Column="1" Grid.Row="0"  Margin="5,2,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" />
+                    <ComboBox  Grid.Column="2" Grid.Row="0" Margin="0,2,0,0" HorizontalAlignment="Left"  VerticalAlignment="Center" Height="23" Width="auto" SelectedIndex="3" ItemsSource="{Binding DistanceCollections}" SelectedValue="{Binding Path = WavelengthDistance}" SelectedValuePath="Value" DisplayMemberPath="Key"  />
+
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Высота полёта носителя"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"   />
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=FlightAltitude}" PreviewTextInput="TextBox_PreviewTextInput" Margin="5,2,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" />
+                    <ComboBox  Grid.Column="2" Grid.Row="1" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="23" Width="auto" SelectedIndex="4" ItemsSource="{Binding DistanceCollections}" SelectedValue="{Binding Path = FlightAltitudeDistance}" SelectedValuePath="Value" DisplayMemberPath="Key" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Скорость полёта (сканирования)"    Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"   />
+                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=FlightSpeed}" PreviewTextInput="TextBox_PreviewTextInput"  Margin="5,2,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" />
+                    <Grid Grid.Column="2" Grid.Row="2" Margin="0,2,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Margin="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="23" Width="auto" SelectedIndex="3" ItemsSource="{Binding DistanceCollections}" SelectedValue="{Binding Path = FlightSpeedDistance}" SelectedValuePath="Value" DisplayMemberPath="Key"  />
+                        <TextBlock Margin="5,1,5,0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Text="/" />
+                        <ComboBox Margin="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Height="23" Width="auto" SelectedIndex="3" ItemsSource="{Binding TimeCollections}" SelectedValue="{Binding Path = FlightSpeedTime}" SelectedValuePath="Value" DisplayMemberPath="Key"   />
+                    </Grid>
+
+                    <TextBlock Grid.Column="0" Grid.Row="3" Text="Полоса обзора"   Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"   />
+                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Swath}" PreviewTextInput="TextBox_PreviewTextInput"   Margin="5,2,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" />
+                    <ComboBox  Grid.Column="2" Grid.Row="3" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="23" Width="auto" SelectedIndex="4" ItemsSource="{Binding DistanceCollections}" SelectedValue="{Binding Path = SwathDistance}" SelectedValuePath="Value" DisplayMemberPath="Key" >
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="4" Text="Разрешающая способность РЛС "  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"  IsHitTestVisible="False" />
+                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=RadarResolution}" PreviewTextInput="TextBox_PreviewTextInput"  Margin="5,2,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" />
+                    <ComboBox  Grid.Column="2" Grid.Row="4" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="23" Width="auto" SelectedIndex="3" ItemsSource="{Binding DistanceCollections}" SelectedValue="{Binding Path = RadarResolutionDistance}" SelectedValuePath="Value" DisplayMemberPath="Key"  >
+                    </ComboBox>
+
+                    <TextBlock Grid.Column="0" Grid.Row="5" Text="Максимальная дальность радиолокационного наблюдения"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"   />
+                    <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=MaxRangeOfRadarSurveillance}" PreviewTextInput="TextBox_PreviewTextInput"  Margin="5,2,5,0" HorizontalAlignment="Left"  VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" />
+                    <ComboBox  Grid.Column="2" Grid.Row="5" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Height="23" Width="auto" SelectedIndex="4" ItemsSource="{Binding DistanceCollections}" SelectedValue="{Binding Path = MaxRangeOfRadarSurveillanceDistance}" SelectedValuePath="Value" DisplayMemberPath="Key"  />
+
+                    <TextBlock Text="База сигнала" Grid.Column="0" Grid.Row="6"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"   />
+                    <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=SignalBase}" PreviewTextInput="TextBox_PreviewTextInput"  Margin="5,2,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" />
+                    <TextBlock Text="B" Grid.Column="2" Grid.Row="6"  Margin="5,3,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  />
+
+                    <TextBlock Grid.Column="0" Grid.Row="7" Text="Раскрыв антенны в горизонтальной пл-ти"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"   />
+                    <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Path=OpeningTheAntennasInTheHorizontal}" PreviewTextInput="TextBox_PreviewTextInput"  Margin="5,2,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" />
+                    <ComboBox  Grid.Column="2" Grid.Row="7" Margin="0,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="23" Width="auto" SelectedIndex="3" ItemsSource="{Binding DistanceCollections}" SelectedValue="{Binding Path = OpeningTheAntennasInTheHorizontalDistance}" SelectedValuePath="Value" DisplayMemberPath="Key" />
+
+                    <TextBlock Grid.Column="0" Grid.Row="8" Text="Средняя частота повторений"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"   />
+                    <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding Path=AverageRepetitionRate}" PreviewTextInput="TextBox_PreviewTextInput"  Margin="5,2,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" />
+                    <TextBlock Text="Гц" Grid.Column="2" Grid.Row="8"  Margin="5,3,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  />
+
+                    <TextBlock Grid.Column="0" Grid.Row="9" Text="Удельная ЭПР"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"   />
+                    <TextBox Grid.Column="1" Grid.Row="9" Text="{Binding Path=SpecificEPR}" PreviewTextInput="TextBox_PreviewTextInput"  Margin="5,2,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" />
+                    <TextBlock Text="м²" Grid.Column="2" Grid.Row="9"  Margin="5,3,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  />
+                </Grid>
+
+            </GroupBox>
+
+            <GroupBox Margin="5" Grid.Column="1"  Grid.Row="1"  >
+                <GroupBox.Header>
+                    <TextBlock Text="Постоянные или официально принятые параметры" MaxWidth="400" TextWrapping="Wrap" FontWeight="Heavy"  FontSize="15" />
+                </GroupBox.Header>
+                <Grid Margin="5" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.RowSpan="10" Grid.ColumnSpan="3" Opacity="0.2" Margin="-5" CornerRadius="10">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.7,0" StartPoint="0,0">
+                                <GradientStop Color="Blue" Offset="0"/>
+                                <GradientStop  Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+
+                    <TextBlock Text="Скорость света" Grid.Column="0" Grid.Row="0" Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"   />
+                    <TextBox Text="{Binding Path=SpeedLight, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="TextBox_PreviewTextInput" Grid.Column="1" Grid.Row="0" Margin="5,2,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" >
+                        <TextBox.ToolTip >
+                            Скорость света в вакуме - фундаментальная физическая постоянная, по определению, точно равная 299 792 458 м/с
+                        </TextBox.ToolTip>
+                    </TextBox>
+                    <Grid Grid.Column="2" Grid.Row="0" Margin="0,2,0,0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Margin="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Height="23" Width="auto" SelectedIndex="3" ItemsSource="{Binding DistanceCollections}" SelectedValue="{Binding Path = SpeedLightDistance}" SelectedValuePath="Value" DisplayMemberPath="Key" />
+                        <TextBlock Margin="5,1,5,0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Text="/" />
+                        <ComboBox Margin="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Height="23" Width="auto" SelectedIndex="3" ItemsSource="{Binding TimeCollections}" SelectedValue="{Binding Path = SpeedLightTime}" SelectedValuePath="Value" DisplayMemberPath="Key"  />
+                    </Grid>
+
+                    <TextBlock Text="Постоянная Больцмана k" Grid.Column="0" Grid.Row="1"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" FontWeight="Bold" />
+                    <TextBlock Text="{Binding Path=K}" Grid.Column="1" Grid.Row="1"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Height="23" Width="100" />
+                    <TextBlock Text="Дж/К" Grid.Column="2" Grid.Row="1"  Margin="5,6,5,0" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap"  />
+                </Grid>
+
+            </GroupBox>
+
+            <GroupBox Grid.Row="0" Grid.Column="1" Margin="5"   >
+                <GroupBox.Header>
+                    <TextBlock Text="Коэффиценты" MaxWidth="400" TextWrapping="Wrap" FontWeight="Heavy"  FontSize="15" />
+                </GroupBox.Header>
+                <Grid Margin="5" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.RowSpan="10" Grid.ColumnSpan="3" Opacity="0.4" Margin="-5" CornerRadius="10">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                                <GradientStop Color="Sienna" Offset="0"/>
+                                <GradientStop  Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                    <TextBlock Text="Качества" Grid.Column="0" Grid.Row="0"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"   />
+                    <TextBox Text="{Binding Path=CoefficientQuality}" PreviewTextInput="TextBox_PreviewTextInput" Grid.Column="1" Grid.Row="0" Margin="5,2,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" />
+
+                    <TextBlock Text="Шума входного каскада" Grid.Column="0" Grid.Row="1"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"   />
+                    <TextBox Text="{Binding Path=CoefficientInputStageNoise}" PreviewTextInput="TextBox_PreviewTextInput" Grid.Column="1" Grid.Row="1" Margin="5,2,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" />
+
+                    <TextBlock Text="Шума преобразователя частоты" Grid.Column="0" Grid.Row="2"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"   />
+                    <TextBox Text="{Binding Path=CoefficientFrequencyConverterNoise}" PreviewTextInput="TextBox_PreviewTextInput" Grid.Column="1" Grid.Row="2" Margin="5,2,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" />
+
+                    <TextBlock Text="Шума УПЧ" Grid.Column="0" Grid.Row="3"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"   />
+                    <TextBox Text="{Binding Path=CoefficientYPCHNoise}" PreviewTextInput="TextBox_PreviewTextInput" Grid.Column="1" Grid.Row="3" Margin="5,2,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" />
+
+                    <TextBlock Text="Усиления входного каскада" Grid.Column="0" Grid.Row="4"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"   />
+                    <TextBox Text="{Binding Path=CoefficientInputStageGain}" PreviewTextInput="TextBox_PreviewTextInput" Grid.Column="1" Grid.Row="4" Margin="5,2,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" />
+
+                    <TextBlock Text="Передачи преобразователя частоты"  Grid.Column="0" Grid.Row="5"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap"  FontWeight="Bold"   />
+                    <TextBox Text="{Binding Path=CoefficientFrequencyConverterTransmission}" PreviewTextInput="TextBox_PreviewTextInput" Grid.Column="1" Grid.Row="5" Margin="5,2,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" />
+
+                    <TextBlock Text="Различимости" Grid.Column="0" Grid.Row="6"  Margin="0,6,5,5" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Bold"   />
+                    <TextBox Text="{Binding Path=CoefficientDistinction}" PreviewTextInput="TextBox_PreviewTextInput" Grid.Column="1" Grid.Row="6" Margin="5,2,5,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" VerticalContentAlignment="Center" Height="23" Width="100" />
+
+
+                </Grid>
+
+            </GroupBox>
+        </Grid>
+        <Button Content="Сохранить" HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="100,0,0,0" Grid.Row="2" Width="75" Click="ButtonSave_Click"/>
+        <Button Content="Загрузить" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="200,0,0,0" Grid.Row="2"  Width="75" Click="ButtonLoading_Click"/>
+        <Button Content="Старт" HorizontalAlignment="Right" Margin="0,0,200,0" Grid.Row="2" VerticalAlignment="Center" Width="75" Click="ButtonStart_Click"/>
+
+    </Grid>
+</Window>
